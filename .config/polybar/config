@@ -1,0 +1,188 @@
+[bar/i3wmthemer_bar]
+width = 100%
+height = 30 
+radius = 0
+fixed-center = true
+
+background = #1d1f21
+foreground = #c5c8c6
+
+line-size = 2
+line-color = #373b41
+
+border-size =
+border-color =
+
+padding-left = 0
+padding-right = 2 
+
+module-margin-left = 1
+module-margin-right = 2
+
+font-0 = "Source Code Pro Semibold:size=10;1"
+font-1 = "Font Awesome 5 Free:style=Solid:size=10;1"
+font-2 = "Font Awesome 5 Brands:size=10;1"
+font-3 = "NotoEmoji:scale=8"
+font-4 = "Font Awesome 5 Free Solid:pixelsize=12;2"
+font-5 = "FontAwesome"
+
+modules-left = i3
+modules-center = date
+modules-right = pulseaudio tray battery powermenu
+
+
+#tray-detach = true
+#tray-position = right 
+#tray-underline = #dfc5a4
+#;tray-padding =
+#wm-restack = i3
+#override-redirect = false
+
+cursor-click = pointer
+cursor-scroll = ns-resize
+
+[module/tray]
+type = internal/tray
+
+format-margin = 8px
+tray-spacing = 8px
+
+[module/i3]
+type = internal/i3
+format = <label-state> <label-mode>
+index-sort = true
+wrapping-scroll = false
+
+label-mode-padding = 2
+label-mode-foreground = #c5c8c6
+label-mode-background = #282a2e
+
+label-focused = %index%
+label-focused-background = #373b41
+label-focused-foreground = #6b7443
+label-focused-padding = 2
+
+label-unfocused = %index%
+label-unfocused-background = #282a2e
+label-unfocused-foreground = #c5c8c6
+label-unfocused-padding = 2
+
+label-visible = %index%
+label-visible-background = #282a2e
+label-visible-foreground = #c5c8c6
+label-visible-padding = 2
+
+label-urgent = %index%
+label-urgent-background = #BA2922
+label-urgent-padding = 2
+
+[module/date]
+type = internal/date
+interval = 5
+
+date =
+date-alt = " %Y-%m-%d"
+
+time = %H:%M
+time-alt = %H:%M:%S
+
+format-prefix =
+format-foreground = #c5c8c6
+format-background = #282a2e
+format-padding = 2
+
+label = %date% %time%
+
+;; Power Menu Module
+[module/powermenu]
+type = custom/text
+
+content = 
+#content-background = black
+#content-foreground = red
+
+click-left = ~/.config/rofi/powermenu/type-1/powermenu.sh
+click-right = powermenu_t1
+
+#[module/powermenu]
+#type = custom/menu
+#
+#expand-right = true
+#
+#format-spacing = 1
+#
+#label-open =
+#label-open-foreground = #c5c8c6
+#label-close =
+#label-close-foreground = #c5c8c6
+#label-separator = |
+#label-separator-foreground = #c5c8c6
+#
+#menu-0-0 = reboot
+#menu-0-0-exec = menu-open-1
+#menu-0-1 = power off
+#menu-0-1-exec = menu-open-2
+#menu-0-2 = log off
+#menu-0-2-exec = menu-open-3
+#
+#menu-1-0 = cancel
+#menu-1-0-exec = menu-open-0
+#menu-1-1 = reboot
+#menu-1-1-exec = reboot
+#
+#menu-2-0 = power off
+#menu-2-0-exec = poweroff
+#menu-2-1 = cancel
+#menu-2-1-exec = menu-open-0
+#
+#menu-3-0 = log off
+#menu-3-0-exec = i3 exit logout
+#menu-3-1 = cancel
+#menu-3-1-exec = menu-open-0
+
+[settings]
+screenchange-reload = true
+
+[global/wm]
+margin-top = 0
+margin-bottom = 0
+
+[module/pulseaudio]
+type = internal/pulseaudio
+
+; Sink to be used, if it exists (find using `pacmd list-sinks`, name field)
+; If not, uses default sink
+; sink = alsa_output.pci-0000_12_00.3.analog-stereo
+
+; Use PA_VOLUME_UI_MAX (~153%) if true, or PA_VOLUME_NORM (100%) if false
+; Default: true
+use-ui-max = true
+
+; Interval for volume increase/decrease (in percent points)
+; Default: 5
+interval = 5
+
+; Reverses the increment/decrement on scroll event. Set this to true if you are
+; using natural scrolling option on your touchpad.
+; New in version 3.7.0
+; Default: false
+reverse-scroll = false
+
+click-right = pavucontrol
+
+[module/temperature]
+type = custom/script
+exec = sensors | awk '/^Package id 0:/ {print $4}'
+label = "CPU: %output%"
+format-prefix="🔥 "
+format-underline = #BA2922
+
+[module/battery]
+type = custom/text
+
+content =  
+#content-background = black
+#content-foreground = red
+
+click-left = ~/.config/rofi/applets/bin/battery.sh
+click-right = powermenu_t1
