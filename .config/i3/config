@@ -316,3 +316,6 @@ bindsym $mod+t exec thunar
 
 #Dashboar
 bindsym $mod+Ctrl+d exec --no-startup-id /home/fernando/.config/eww/dashboard/launch_dashboard
+
+#Kb toggle layout
+bindsym  Ctrl+space exec --no-startup-id bash /home/fernando/toggle_kb_layout.sh
